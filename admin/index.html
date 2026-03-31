@@ -1,14 +1,27 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Support Portal Admin</title>
-  <script src="https://unpkg.com/sveltia-cms@latest/dist/sveltia-cms.js"></script>
+  <!-- Updated script source for better reliability -->
+  <script src="https://unpkg.com/@sveltia/cms@0.3.0/dist/sveltia-cms.js"></script>
 </head>
 <body>
   <script>
-    window.SveltiaCMS.init();
+    // Wait a moment for the script to fully load
+    setTimeout(() => {
+      if (typeof window.SveltiaCMS !== 'undefined') {
+        window.SveltiaCMS.init();
+      } else {
+        console.error("SveltiaCMS not loaded. Check network tab for script errors.");
+        document.body.innerHTML = `
+          <div style="padding: 40px; text-align: center; font-family: system-ui;">
+            <h2 style="color: #ef4444;">Sveltia CMS failed to load</h2>
+            <p>Please refresh the page or check browser console for more details.</p>
+          </div>`;
+      }
+    }, 800);
   </script>
 </body>
 </html>
