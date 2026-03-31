@@ -4,24 +4,24 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Support Portal Admin</title>
-  <!-- Updated script source for better reliability -->
-  <script src="https://unpkg.com/@sveltia/cms@0.3.0/dist/sveltia-cms.js"></script>
+  <!-- Stable working version of Sveltia CMS (March 2026) -->
+  <script src="https://unpkg.com/@sveltia/cms@0.150.0/dist/sveltia-cms.js"></script>
 </head>
 <body>
   <script>
-    // Wait a moment for the script to fully load
+    // Small delay to ensure script loads
     setTimeout(() => {
-      if (typeof window.SveltiaCMS !== 'undefined') {
+      if (window.SveltiaCMS && typeof window.SveltiaCMS.init === 'function') {
         window.SveltiaCMS.init();
       } else {
-        console.error("SveltiaCMS not loaded. Check network tab for script errors.");
         document.body.innerHTML = `
-          <div style="padding: 40px; text-align: center; font-family: system-ui;">
-            <h2 style="color: #ef4444;">Sveltia CMS failed to load</h2>
-            <p>Please refresh the page or check browser console for more details.</p>
+          <div style="padding: 50px; text-align: center; font-family: system-ui; max-width: 600px; margin: 100px auto;">
+            <h2 style="color: #ef4444; font-size: 24px;">Sveltia CMS failed to load</h2>
+            <p style="margin: 20px 0;">Please refresh the page (Ctrl + R) or try again in a new tab.</p>
+            <p style="color: #666; font-size: 14px;">If the problem continues, reply with a screenshot of the Console tab.</p>
           </div>`;
       }
-    }, 800);
+    }, 1000);
   </script>
 </body>
 </html>
