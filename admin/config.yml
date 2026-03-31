@@ -1,0 +1,40 @@
+backend:
+  name: github
+  repo: ramesh04301/support-portal   # ← CHANGE THIS
+  branch: main
+  # If GitHub login doesn't work directly, add base_url after setting up OAuth proxy (I'll guide if needed)
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: categories
+    label: "Categories"
+    folder: "data/categories"
+    create: true
+    extension: "json"
+    format: "json"
+    identifier_field: "slug"
+    fields:
+      - { label: "Category Name", name: "name", widget: "string", required: true }
+      - { label: "Slug (auto-generated or manual)", name: "slug", widget: "string", required: true }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Icon (emoji)", name: "icon", widget: "string", default: "📋" }
+
+  - name: issues
+    label: "Known Issues"
+    folder: "data/issues"
+    create: true
+    extension: "json"
+    format: "json"
+    fields:
+      - { label: "Issue Title", name: "title", widget: "string", required: true }
+      - { label: "Category", name: "category", widget: "relation", collection: "categories", value_field: "name", search_fields: ["name"], required: true }
+      - { label: "Subcategory", name: "subcategory", widget: "string" }
+      - { label: "Short Description", name: "short_description", widget: "text", required: true }
+      - { label: "Issue Details", name: "details", widget: "markdown" }
+      - { label: "Resolution Steps", name: "resolution", widget: "markdown" }
+      - { label: "Screenshots", name: "images", widget: "image", multiple: true, choose_url: false }
+      - { label: "Tags", name: "tags", widget: "list", allow_add: true }
+      - { label: "Priority", name: "priority", widget: "select", options: ["Low", "Medium", "High"], default: "Medium" }
+      - { label: "Last Updated", name: "last_updated", widget: "datetime", default: "now", required: false }
