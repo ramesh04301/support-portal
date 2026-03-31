@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support Portal • Known Issues</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    body { font-family: system-ui, sans-serif; }
+    .issue-card { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+    .issue-card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <div class="max-w-7xl mx-auto px-6 py-10">
+    <div class="flex justify-between items-center mb-10">
+      <div>
+        <h1 class="text-4xl font-bold text-gray-900">Support Portal</h1>
+        <p class="text-gray-600 mt-1">Known issues & resolution steps</p>
+      </div>
+      <a href="/admin" target="_blank" class="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium flex items-center gap-2">
+        <i class="fas fa-cog"></i> Admin Panel
+      </a>
+    </div>
+
+    <div class="mb-10">
+      <input id="search" type="text" placeholder="Search issues, categories, subcategories or keywords..." 
+             class="w-full px-6 py-4 text-lg border border-gray-300 rounded-2xl focus:outline-none focus:border-blue-500">
+    </div>
+
+    <div id="portal-content" class="space-y-12">
+      <!-- Content will load here -->
+    </div>
+  </div>
+
+  <script>
+    async function loadPortal() {
+      const div = document.getElementById('portal-content');
+      div.innerHTML = `<p class="text-center text-gray-500 py-20">Loading your support portal...</p>`;
+
+      try {
+        // Placeholder for first time
+        div.innerHTML = `
+          <div class="bg-white rounded-3xl p-12 text-center border border-dashed border-gray-300">
+            <i class="fas fa-folder-open text-6xl text-gray-300 mb-6"></i>
+            <h2 class="text-2xl font-semibold text-gray-700">Welcome to your Support Portal!</h2>
+            <p class="text-gray-500 mt-4">Go to the <a href="/admin" class="text-blue-600 underline">Admin Panel</a> and add your first Categories and Known Issues.<br>
+            Subcategories are fully supported.</p>
+          </div>`;
+      } catch(e) {
+        div.innerHTML = `<p class="text-red-500">Error loading data.</p>`;
+      }
+    }
+
+    document.getElementById('search').addEventListener('input', (e) => {
+      // Search will be fully working once you add content
+      console.log('Searching:', e.target.value);
+    });
+
+    window.onload = loadPortal;
+  </script>
+</body>
+</html>
